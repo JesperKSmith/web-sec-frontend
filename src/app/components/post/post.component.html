@@ -1,0 +1,56 @@
+<div class="card post">
+
+  <!-- POST BODY-->
+  <div class="card-block">
+    <h4 class="card-title">{{post.title}}</h4>
+    <h6 class="card-subtitle mb-2 post-author">
+      <i class="fa fa-user" aria-hidden="true"></i> by <span class="post-author-name">{{post.username}}</span>
+      <span class="post-posted-on">posted on </span>
+      <span class="post-date">{{post.createdAt}}</span>
+    </h6>
+    <p class="card-text">{{post.content}}</p>
+
+    <!-- POST COMMENTS SECTION-->
+    <!-- Read Comments -->
+    <div class="comments-read" (click)="showComments()">
+      Read Comments
+    </div>
+
+    <div class="comments-container" *ngIf="commentsVisible">
+
+      <!-- POST COMMENTS START-->
+      <div class="comments">
+
+        <div class="comment" *ngFor="let comment of comments">
+          <div>
+            <span class="comment-author">{{ comment.username }}:</span>
+            <span class="comment-content">{{comment.content}} </span>
+          </div>
+          <span class="comment-date">{{comment.createdAt | date:'medium'}}</span>
+        </div>
+
+      </div>
+      <!-- POST COMMENTS END-->
+
+      <!-- CREATE A COMMENT -->
+      <div class="comment-write">
+        <i class="fa fa-comment-o" aria-hidden="true"></i> Write a comment
+      </div>
+      <div class="input-group">
+        <input type="text" 
+               class="form-control" 
+               placeholder="Recipient's username" 
+               aria-describedby="basic-addon2"
+               [(ngModel)]="newComment">
+        <span class="input-group-addon comment-submit" 
+              id="basic-addon2" (click)="submitComment()"> 
+          <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+        </span>
+      </div>
+
+    </div>
+    <!-- POST COMMENTS END-->
+
+  </div>
+
+</div>

@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  padding-top: 5rem;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.btn{
+  cursor: pointer;
+}
+
+/* FORM RELATED */
+.ng-valid[required], .ng-valid.required, .valid-field  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+.ng-untouched:not(form){
+  border-left: 5px solid rgba(0,0,0,.15);
+}
+
+.btn-disabled{
+  background: grey !important;
+  border-color: grey !important;
+}
+
+.form-error-message{
+  color: red;
+}
+
+
+/* POST RELATED START */
+
+.post{
+  margin-bottom: 15px;
+}
+
+/* POST RELATED END */
+
+.todos{
+  color: grey;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid grey;
+  padding: 31px;
+  border-radius: 10px;
+  background: rgba(220, 220, 220, 0.37);
+}

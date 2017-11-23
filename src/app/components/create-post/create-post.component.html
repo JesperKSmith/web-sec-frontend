@@ -1,0 +1,33 @@
+<div class="container">
+  <h3>Create a Post</h3>
+  <br>
+  
+  <form [formGroup]="postForm" (ngSubmit)="submitForm()" novalidate>
+    
+    <!-- TITLE -->
+    <div class="form-group row">
+      <label for="title" class="col-sm-2 col-form-label">Title</label>
+      <div class="col-sm-12">
+        <input type="text" class="form-control" [class.valid-field]="isValidField('title')" id="title" placeholder="Title"
+          formControlName="title">
+      </div>
+
+      <!-- CONTENT -->
+      <label for="content" class="col-sm-2 col-form-label">Content</label>
+      <div class="col-sm-12">
+        <textarea rows="4" cols="50" class="form-control" [class.valid-field]="isValidField('content')" id="content" placeholder="Content"
+          formControlName="content">
+        </textarea>
+      </div>
+
+      <!-- SUBMIT BUTTON -->
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-success btn-create-post" [class.btn-disabled]="!isValidForm()" [disabled]="!isValidForm()">
+                      Create Post
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

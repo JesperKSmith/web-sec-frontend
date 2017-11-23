@@ -1,0 +1,96 @@
+<div class="container">
+  <h3>Create an Account</h3>
+  <br>
+  
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()" novalidate>
+    <!-- USERNAME -->
+    <div class="form-group row">
+      <label for="email" class="col-sm-2 col-form-label">Username</label>
+      <div class="col-sm-6">
+        <input type="username" class="form-control" [class.valid-field]="isValidField('username')" id="username" placeholder="Username"
+          formControlName="username">
+      </div>
+      <!-- IF USERNAME ERRORS-->
+      <div *ngIf="username.errors && username.dirty && username.touched" class="form-group row">
+        <label *ngIf="username.errors.required" for="username" class="col-sm-8 col-form-label form-error-message">
+        Username is required
+      </label>
+      </div>
+
+
+    </div>
+    <!-- EMAIL -->
+    <!--<div class="form-group row">
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-6">
+        <input type="email" class="form-control" [class.valid-field]="isValidField('email')" id="email" placeholder="Email" formControlName="email">
+      </div>
+    </div>-->
+    <!-- IF EMAIL ERRORS-->
+    <!--<div *ngIf="email.errors && email.dirty && email.touched" class="form-group row">
+      <label *ngIf="email.errors.email" for="email" class="col-sm-8 col-form-label form-error-message">
+        Wrong Email Format
+      </label>
+
+      <label *ngIf="email.errors.required" for="email" class="col-sm-8 col-form-label form-error-message">
+        Email is Required
+      </label>
+    </div>-->
+
+    <!-- PASSWORD -->
+    <div class="form-group row">
+      <label for="password" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control" [class.valid-field]="isValidField('password1')" id="password1" placeholder="Password"
+          formControlName="password1">
+      </div>
+    </div>
+    <!-- IF PASSWORD ERROR -->
+    <div *ngIf="password1.errors && (password1.dirty && password1.touched)" class="form-group row">
+
+      <!-- if password is too short-->
+      <label *ngIf="password1.errors.minlength" for="email" class="col-sm-8 col-form-label form-error-message">
+        Password is too short
+      </label>
+    </div>
+
+    <!-- REPEAT PASSWORD -->
+    <div class="form-group row">
+      <label for="password" class="col-sm-2 col-form-label">Repeat Password</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control" [class.valid-field]="isValidField('password2')" id="password2" placeholder="Repeat Password"
+          formControlName="password2">
+      </div>
+    </div>
+
+    <!-- IF PASSWORD2 ERROR -->
+    <div *ngIf="password2.errors && (password2.dirty && password2.touched)">
+      <!-- if password is too short-->
+      <div *ngIf="password2.errors.minlength" class="form-group row">
+        <label for="email" class="col-sm-8 col-form-label form-error-message">
+        Password is too short
+      </label>
+      </div>
+    </div>
+
+
+    <!-- IF PASSWORDS DONT MATCH-->
+    <div *ngIf="!areMatchingPasswords() && 
+                (password1.dirty && password1.touched) &&
+                (password2.dirty && password2.touched)" class="form-group row">
+      <label for="email" class="col-sm-8 col-form-label form-error-message">
+        Passwords dont match
+      </label>
+    </div>
+
+
+
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-6">
+        <button class="btn btn-success" [class.btn-disabled]="!isValidForm()" [disabled]="!isValidForm()">
+                    Register
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

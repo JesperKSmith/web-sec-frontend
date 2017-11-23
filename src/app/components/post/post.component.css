@@ -1,0 +1,66 @@
+.post-author{
+    color: rgba(128, 128, 128, 0.7);
+}
+
+/* COMMENTS RELATED */
+
+
+.comments-read{
+    color: rgba(33, 150, 243, 0.8);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.comment-write{
+    color: rgba(33, 150, 243, 0.8);
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.comments-amount{
+    background-color: rgba(5, 115, 203, 0.9686274509803922) !important;
+}
+
+.comments-container{
+    background: rgba(128, 128, 128, 0.0784313725490196);
+    border-top: 2px solid rgba(128, 128, 128, 0.23137254901960785);
+    margin-top: 10px;
+    padding: 15px;
+}
+
+.comment-author{
+    font-weight: 500;
+}
+
+.comment-date{
+    color: rgba(7, 118, 206, 0.83);
+    font-size: 13px
+}
+
+.comment{
+    margin-bottom: 10px;
+}
+
+.comment-content{
+    font-size: 15px;
+}
+
+.comment-submit{
+    cursor: pointer;
+    background: rgba(5, 115, 203, 0.9686274509803922);
+    color: white;
+}
+
+.post-posted-on{
+    font-weight: 200;
+    color: black;
+}
+
+.post-date{
+    font-weight: 200;
+    color: #2196F3;
+}
