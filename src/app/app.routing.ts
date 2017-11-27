@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 // AUTH GUARD SERVICE
 import { AuthGuard } from './services/auth-guard.service';
 
-// COMPONETNS
+// COMPONENTS
+import { LandingComponent } from './components/landing/landing.component';
 import { MainComponent } from './components/main/main.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -14,11 +15,14 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
 
 //ROUTES
 export const routes: Routes = [
-   { path: '', component: MainComponent },
-   { path: 'home', component: MainComponent },
+
+    // ANONYMOUS ROUTES
+   { path: '', component: LandingComponent },
+   { path: 'landing', component: LandingComponent },
    { path: 'login', component: LoginComponent },
-   { path: 'register', component: RegisterComponent },
-   { path: 'create-post', component: CreatePostComponent },
+   { path: 'register', component: RegisterComponent },      
+   { path: 'home', component: MainComponent},
+   { path: 'create-post', component: CreatePostComponent},
    { path: 'private', component: PrivateComponent, canActivate: [AuthGuard] },
    { path: '**', component: PageNotFoundComponent }
 ];

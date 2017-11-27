@@ -28,6 +28,7 @@ import { Router } from './app.routing';
 import { RequestService } from './services/request.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { LandingComponent } from './components/landing/landing.component';
 //==============================================================================
 // [ SERVICES END ]
 //==============================================================================
@@ -43,7 +44,8 @@ import { AuthGuard } from './services/auth-guard.service';
     PageNotFoundComponent,
     PrivateComponent,
     CreatePostComponent,
-    PostComponent
+    PostComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
