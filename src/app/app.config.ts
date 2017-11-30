@@ -1,4 +1,6 @@
-const apiBaseUrl = "http://kaempe.club/WebSec";
+import { environment } from "../environments/environment";
+
+const apiBaseUrl = environment.apiUrl;
 
 export var Config =  {
   apiPostsUrl : `${apiBaseUrl}/PostController_v2.php`,
