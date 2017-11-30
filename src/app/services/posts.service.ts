@@ -26,10 +26,7 @@ export class PostsService {
     return this._http
       .get(Config.apiPostsUrl, this._requestService.AuthHeadersForGET())
         .toPromise()
-          .then((posts) => {
-             console.log('getPosts');
-              return posts.json();
-          })
+          .then((posts) => posts.json())
           .catch(this.handleError);
   }
 
@@ -51,8 +48,6 @@ export class PostsService {
   // PRIVATE FUNCTION ----------------------------------------------------------
   //----------------------------------------------------------------------------
   private handleError(error: any): Promise<any> {
-    console.log("%c An error occurred", "background: red; color:white; font-size:22px;");
-    console.error(error);
     return Promise.reject(error.message || error);
   }
 

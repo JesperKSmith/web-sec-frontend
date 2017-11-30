@@ -5,23 +5,18 @@ declare var swal: any;
 export class AlertService {
 
    //------------------------------------------------------------------
-   
    success(title:string, message:string): void{
         swal(title, message, 'success');
    }
-
    //------------------------------------------------------------------
 
    error(title:string, message:string): void{
         swal(title, message, 'error');
    }
-
    //------------------------------------------------------------------
-
    info(title:string): void{
         swal(title);
    }
-
    //------------------------------------------------------------------
 
 }

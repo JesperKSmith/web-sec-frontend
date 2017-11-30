@@ -1,14 +1,19 @@
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Http, Headers } from "@angular/http";
+import { Router }    from '@angular/router';
 
+import { AlertService } from './alert-service.service';
 import { Config } from "./../app.config";
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
 
-  constructor( @Inject(Http) private _http: Http) { }
+  constructor( 
+    private router: Router,
+    @Inject(Http) private _http: Http
+  ) { }
 
   // LOGIN
   //-----------------------------------------------------------
@@ -25,11 +30,10 @@ export class AuthService {
     return this._http
       .post(Config.apiLoginUrl, dataPayload, { headers })
       .toPromise()
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         this.setToken(data);
+        this.router.navigate(['/home']);
       })
       .catch(this.handleError);
   }
@@ -47,11 +51,10 @@ export class AuthService {
     return this._http
       .post(Config.apiRegisterUrl, dataPayload, { headers })
       .toPromise()
-      .then(response => {
-        return response.json()
-      })
+      .then(response => response.json())
       .then(data => {
         this.setToken(data);
+        return data; 
       })
       .catch(this.handleError);
   }
@@ -92,12 +95,10 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('tta');
-
-    location.reload();
+    this.router.navigate(['/login']);
   }
   //------------------------------------------------------------------
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
   //------------------------------------------------------------------

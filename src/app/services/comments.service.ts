@@ -43,12 +43,7 @@ export class CommentsService {
       this._requestService.AuthHeadersForPOST())
         .toPromise()
         .then(response => response.json())
-        .then((data) => {
-          
-          console.log('saveComment response =>');
-          console.log(data);
-          return data;
-        })
+        .then((data) => data)
         .catch(this.handleError);
   }
 
@@ -56,7 +51,6 @@ export class CommentsService {
   // PRIVATE FUNCTION ----------------------------------------------------------
   //----------------------------------------------------------------------------
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 
