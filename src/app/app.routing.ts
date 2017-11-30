@@ -21,10 +21,10 @@ export const routes: Routes = [
    { path: 'landing', component: LandingComponent },
    { path: 'login', component: LoginComponent },
    { path: 'register', component: RegisterComponent },      
-   { path: 'home', component: MainComponent},
-   { path: 'create-post', component: CreatePostComponent},
+   { path: 'home', component: MainComponent, canActivate: [AuthGuard]},
+   { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard]},
    { path: 'private', component: PrivateComponent, canActivate: [AuthGuard] },
    { path: '**', component: PageNotFoundComponent }
 ];
 
-export const Router: ModuleWithProviders = RouterModule.forRoot(routes);
+export const Router: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: true });
