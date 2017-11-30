@@ -1,6 +1,6 @@
 export class Comment {
   id: number;
-  author: string;
+  username: string;
   content: string;
   createdAt: Date;
 }
