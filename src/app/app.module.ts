@@ -27,11 +27,13 @@ import { PostComponent } from './components/post/post.component';
 import { Router } from './app.routing';
 import { RequestService } from './services/request.service';
 import { AuthService } from './services/auth.service';
+import { AlertService } from './services/alert-service.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { LandingComponent } from './components/landing/landing.component';
 //==============================================================================
 // [ SERVICES END ]
 //==============================================================================
+
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { LandingComponent } from './components/landing/landing.component';
   providers: [
     RequestService,
     AuthService,
+    AlertService,
     AuthGuard
   ],
   bootstrap: [AppComponent]
