@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Post } from "../../models/postModel";
 import { PostsService } from "../../services/posts.service";
@@ -20,7 +21,9 @@ export class CreatePostComponent {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _postsService: PostsService
+    private _postsService: PostsService,
+    private _alert: AlertService,
+    private _router: Router
   ) {
     this.createForm();
   }
@@ -33,12 +36,16 @@ export class CreatePostComponent {
     // @TODO: SANITIZE INPUT ?
     this._postsService.savePost(this.makeNewPost())
         .then(response => {
-          console.log('_postsService.savePost RESPONSE');
-          console.log(response);
+          // Clear the form
+          this.postForm.reset();
+          // Inform user
+          this._alert.success(
+            "Success",
+            `Post '${response.title}' is successfully created!`
+          );
+          // Redirect to posts
+          this._router.navigate(['/home']);
         })
-
-
-    this.postForm.reset();
   }
   // ---------------------------------------------------------------------------
 
@@ -48,7 +55,7 @@ export class CreatePostComponent {
         '', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(20)])
       ],
       content: [
-        '', Validators.compose([Validators.required, Validators.minLength(25)])
+        '', Validators.compose([Validators.required, Validators.minLength(5)])
       ]
     });
   }
