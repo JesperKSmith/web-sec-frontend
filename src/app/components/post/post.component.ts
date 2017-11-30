@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Post } from './../../models/postModel';
 
 import { CommentsService } from "../../services/comments.service";
+import { AlertService } from "../../services/alert-service.service";
 import { Comment } from "../../models/commentModel";
 
 @Component({
@@ -11,18 +12,21 @@ import { Comment } from "../../models/commentModel";
   styleUrls: ['./post.component.css'],
   providers: [CommentsService]
 })
-export class PostComponent{
+export class PostComponent {
 
   @Input() post: Post;
 
-  commentsVisible: boolean ;
+  commentsVisible: boolean;
   comments: Comment[];
 
   newComment: string;
 
-  constructor(private _commentService: CommentsService){
-    this.comments = [];
-    this.newComment = "";
+  constructor(
+    private _commentService: CommentsService,
+    private _alert: AlertService
+  ) {
+      this.comments = [];
+      this.newComment = "";
   }
 
 
@@ -33,26 +37,27 @@ export class PostComponent{
 
     // SUBMIT COMMENT
     this._commentService.saveComment(sanitizedComment, this.post.id)
-        .then(response => { 
-            console.log('_commentService.saveComment received response');
-            console.log(response);
-            
-            // @TODO: ADD COMMENT TO THE COMMENTS ARRAY
-            let newComment = new Comment();
-            newComment.id = 777;
-            newComment.author = "John Galt";
-            newComment.content = sanitizedComment;
-            newComment.createdAt = new Date();
-            
-            this.comments.push(newComment)
-        });
+      .then(commetResponse => {
 
-    // REST FORM
-    this.newComment = "";
+        // Feedback for the user
+        this._alert.success(
+          "Success",
+          "Comment successfully created!"
+        )
+
+        // Create and render comment
+        let newComment = this._mapResponseToComment(commetResponse);
+        this.comments.push(newComment)
+
+        // Reset the form
+        this.newComment = "";
+      });
+
+    
   }
 
   //----------------------------------------------------------------------------
-  showComments(): void{
+  showComments(): void {
     this.commentsVisible = !this.commentsVisible;
 
     //Get Comments for the post PROD
@@ -61,37 +66,27 @@ export class PostComponent{
 
   //============================================================================
   // Private Function
-  _getCommentsForPost(): void{
-      this._commentService.getComments(this.post.id)
+  _getCommentsForPost(): void {
+    this._commentService.getComments(this.post.id)
       .then((comments) => {
-          this.comments = comments;
-          console.log('WE HAVE COMMENTS FOR POST ==> ' + this.post.id);
-          console.log(this.comments);
-        });
+        this.comments = comments;
+      });
   }
 
   //----------------------------------------------------------------------------
-  _getDummyComments(): Comment[]{
+  _mapResponseToComment(comment: any): Comment {
 
-    let comments: Comment[] = [];
+    let newComment = new Comment();
+    newComment.id = comment.id;
+    newComment.username = comment.username;
+    newComment.content = comment.content;
+    newComment.createdAt = comment.createdAt;
 
-    for (var i = 0; i < 7; i++) {
-      
-      let comment = new Comment();
-      comment.author = `John Galt #${i}`;
-      comment.content = `If you're hotter than me, then that means I'm cooler than you.`;
-      comment.createdAt = new Date();
-
-      comments.push(comment);
-    }
-
-    return comments;
+    return newComment;
   }
+
   //----------------------------------------------------------------------------
   _sanitize(dataToSanitize: string): string {
-
-      // do somesanitization
-
-      return dataToSanitize;
+    return dataToSanitize;
   }
 }

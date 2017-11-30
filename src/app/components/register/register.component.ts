@@ -1,14 +1,20 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from "../../services/auth.service";
 import { AlertService } from "../../services/alert-service.service";
+import { ValidationService } from "../../services/validation.service";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [AuthService, AlertService]
+  providers: [
+    AuthService,
+    AlertService,
+    ValidationService
+  ]
 })
 
 export class RegisterComponent {
@@ -18,7 +24,9 @@ export class RegisterComponent {
   constructor(
     private _auth: AuthService,
     private _alert: AlertService,
-    private _formBuilder: FormBuilder
+    private _validator: ValidationService,
+    private _formBuilder: FormBuilder,
+    private _router: Router
   ) {
     this.createForm();
   }
@@ -27,12 +35,20 @@ export class RegisterComponent {
 
     let testUser = this._makeUser();
 
-    this._auth.register(testUser).then(response => {
-      console.log("YOU MADE IT!.. MAYBE");
-    });
+    this._auth.register(testUser)
+      .then(response => {
+        this.registerForm.reset();
+        this._alert.success("Hallo 😘", "Successful registration.");
 
-    this.registerForm.reset();
-    window.location.reload(true);
+        setTimeout(() => {
+          this._router.navigate(['/home']);
+          location.reload();
+        }, 1500);
+      })
+      .catch(err => {
+        this._alert.error("Register Error", err.message);
+      });
+
   }
 
 
@@ -45,10 +61,21 @@ export class RegisterComponent {
         '', Validators.compose([Validators.required, Validators.minLength(3)])
       ],
       password1: [
-        '', Validators.compose([Validators.required, Validators.minLength(6)])
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(6),
+          this._validator.inputHasNumber,
+          this._validator.inputHasUpperCase
+        ])
       ],
       password2: [
-        '', Validators.compose([Validators.required, Validators.minLength(6)])
+        '', Validators.compose([
+          Validators.required,
+          Validators.minLength(6),
+          this._validator.inputHasNumber,
+          this._validator.inputHasUpperCase
+        ])
       ]
     });
   }
@@ -86,5 +113,4 @@ export class RegisterComponent {
       password: this.registerForm.value.password1
     }
   }
-  // ---------------------------------------------------------------------------
 }

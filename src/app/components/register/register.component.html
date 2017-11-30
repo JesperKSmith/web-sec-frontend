@@ -2,6 +2,7 @@
   <h3>Create an Account</h3>
   <br>
   
+
   <form [formGroup]="registerForm" (ngSubmit)="submitForm()" novalidate>
     <!-- USERNAME -->
     <div class="form-group row">
@@ -49,9 +50,20 @@
     <div *ngIf="password1.errors && (password1.dirty && password1.touched)" class="form-group row">
 
       <!-- if password is too short-->
-      <label *ngIf="password1.errors.minlength" for="email" class="col-sm-8 col-form-label form-error-message">
-        Password is too short
+      <label *ngIf="password1.errors.minlength" for="password1" class="col-sm-8 col-form-label form-error-message">
+        Password is too short. Minimum length is 6 characters
       </label>
+
+      <!-- if password requires number-->
+      <label *ngIf="password1.errors.needsNumber" for="password1" class="col-sm-8 col-form-label form-error-message">
+        Password requires at least one NUMBER
+      </label>
+
+      <!-- if password requires UpperCase-->
+      <label *ngIf="password1.errors.needsUppercase" for="password1" class="col-sm-8 col-form-label form-error-message">
+        Password requires at least one character in UpperCase
+      </label>
+
     </div>
 
     <!-- REPEAT PASSWORD -->
@@ -65,12 +77,22 @@
 
     <!-- IF PASSWORD2 ERROR -->
     <div *ngIf="password2.errors && (password2.dirty && password2.touched)">
+
       <!-- if password is too short-->
-      <div *ngIf="password2.errors.minlength" class="form-group row">
-        <label for="email" class="col-sm-8 col-form-label form-error-message">
-        Password is too short
+      <label *ngIf="password2.errors.minlength" for="password2" class="col-sm-8 col-form-label form-error-message">
+        Password is too short. Minimum length is 6 characters
       </label>
-      </div>
+
+      <!-- if password requires number-->
+      <label *ngIf="password2.errors.needsNumber" for="password2" class="col-sm-8 col-form-label form-error-message">
+        Password requires at least one NUMBER
+      </label>
+
+      <!-- if password requires UpperCase-->
+      <label *ngIf="password2.errors.needsUppercase" for="password2" class="col-sm-8 col-form-label form-error-message">
+        Password requires at least one character in UpperCase
+      </label>
+      
     </div>
 
 

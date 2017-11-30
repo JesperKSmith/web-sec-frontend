@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { AuthService } from "../../services/auth.service";
 import { AlertService } from "../../services/alert-service.service";
@@ -18,7 +18,7 @@ export class NavigationComponent{
   }
 
   logout(): void{
-    console.log('Logout....');
     this._authService.logout();
+    location.reload();
   }
 }

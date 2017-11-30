@@ -23,7 +23,7 @@
 
         <div class="comment" *ngFor="let comment of comments">
           <div>
-            <span class="comment-author">{{ comment.username }}:</span>
+            <span class="comment-author">{{comment.username}}:</span>
             <span class="comment-content">{{comment.content}} </span>
           </div>
           <span class="comment-date">{{comment.createdAt | date:'medium'}}</span>
