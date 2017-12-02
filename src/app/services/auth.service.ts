@@ -3,7 +3,6 @@ import { Observable } from "rxjs/Observable";
 import { Http, Headers } from "@angular/http";
 import { Router }    from '@angular/router';
 
-import { AlertService } from './alert-service.service';
 import { Config } from "./../app.config";
 import 'rxjs/add/operator/toPromise';
 

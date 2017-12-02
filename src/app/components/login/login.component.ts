@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-
-import { AuthService } from "../../services/auth.service";
+import { Router } from "@angular/router";
 
 import { LoginModel } from "../../models/loginModel";
 
-import { Router } from "@angular/router";
-
+import { AuthService } from "../../services/auth.service";
 import { AlertService } from "../../services/alert-service.service";
-
 
 @Component({
   selector: 'app-login',
