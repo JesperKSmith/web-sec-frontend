@@ -12,6 +12,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { PrivateComponent } from './components/private-component/private-component.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
+import { UserComponent } from './components/user/user.component';
+import { FriendsComponent } from './components/friends/friends.component';
 
 //ROUTES
 export const routes: Routes = [

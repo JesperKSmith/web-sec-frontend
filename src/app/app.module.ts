@@ -17,6 +17,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { PrivateComponent } from './components/private-component/private-component.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { PostComponent } from './components/post/post.component';
+import { UserComponent } from './components/user/user.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { FriendsComponent } from './components/friends/friends.component';
 //==============================================================================
 // [ COMPONENTS END ]
 //==============================================================================
