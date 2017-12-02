@@ -4,4 +4,5 @@ export class Post {
   content: string;
   username: string;
   createdAt: string;
+  user_id: string;
 }
