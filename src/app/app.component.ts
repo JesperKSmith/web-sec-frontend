@@ -12,10 +12,10 @@ export class AppComponent {
   title = 'app';
 
   constructor(
-    private _authService:AuthService,
+    private _authService: AuthService,
     private _router: Router
-  ){
-    if(this._authService.isAuthenticated()){
+  ) {
+    if (this._authService.isAuthenticated()) {
       this._router.navigate(['/home']);
     }
   }
