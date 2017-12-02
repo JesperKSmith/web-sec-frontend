@@ -6,20 +6,18 @@
 
     <div class="user-avatar">
       <img class="img-responsive user-image" [src]="user_avatar">
-      <input type="file" 
-             name="file" 
-             id="file" 
-             class="inputfile"
-             accept="image/x-png,image/gif,image/jpeg"
-             (change)="readUrl($event)"/>
-      <label for="file">
+      <input type="file" name="file" id="imageUpload" class="inputfile" accept="image/x-png,image/gif,image/jpeg" (change)="pictureUpload($event)"
+      />
+      <label for="imageUpload" *ngIf="isMe">
         <i class="fa fa-cloud-upload image-upload-icon" aria-hidden="true"></i>
       </label>
     </div>
 
     <div class="profile-menu">
       <div class="profile-menu-item" *ngIf="isMe">
-        <i class="fa fa-cog" aria-hidden="true"></i> Settings
+        <span (click)="showUserSettings()">
+          <i class="fa fa-cog" aria-hidden="true"></i> Settings
+        </span>
       </div>
       <!--<div class="profile-menu-item">
         <i class="fa fa-users" aria-hidden="true"></i> Friends
@@ -27,9 +25,34 @@
     </div>
   </div>
 
-  <!--<div class="profile-settings">
-     <i class="fa fa-cog" aria-hidden="true"></i> Settings
-  </div>-->
+  <div class="user-settings" *ngIf="isMe && showSettings">
+
+    <!-- SETTING ITEM START  ================================================-->
+    <div class="user-setting-item">
+      <label for="exampleFormControlSelect1">
+        <i class="fa fa-eye" aria-hidden="true"></i> Privacy
+      </label>
+
+      <div class="user-settins-selector">
+        <select id="exampleFormControlSelect1" [(ngModel)]="user_preferences">
+          <option *ngFor="let s of privacy_settings" 
+                  [ngValue]="s">
+            {{s.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <!-- SETTING ITEM END  ==================================================-->
+
+
+    <!-- UPDATE SETTING BUTTTON ==============================================-->
+    <div class="mt20">
+      <button class="btn btn-success btn-sm" (click)="updateUserSettings()">
+        <i class="fa fa-floppy-o" aria-hidden="true"></i> Save
+      </button>
+    </div>
+  </div>
+
 </div>
 
 
@@ -49,71 +72,71 @@
     </div>
 
     <div class="user-friends-list" *ngIf="isMe">
-        <!--<div *ngFor="let friend of user_friends">
+      <!--<div *ngFor="let friend of user_friends">
             <p>{{friend.name}}</p>
         </div>-->
 
-        <div>
-          <span class="friends-status online">
+      <div>
+        <span class="friends-status online">
             Online 
             <i class="fa fa-circle online-icon" aria-hidden="true"></i>
           </span>
-          <div class="friend-item" (click)="goToFriendProfle('Deniz1')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz2')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz3')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz4')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz5')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz6')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz1')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
         </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz2')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
+        </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz3')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
+        </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz4')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
+        </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz5')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
+        </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz6')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
+        </div>
+      </div>
 
-        <div>
-          <span class="friends-status offline mt20">
+      <div>
+        <span class="friends-status offline mt20">
               Offline
               <i class="fa fa-circle offline-icon" aria-hidden="true"></i>
           </span>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz7')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz8')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz9')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz10')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz11')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
-            <div class="friend-item" (click)="goToFriendProfle('Deniz12')">
-              <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-              <span class="friend-username">User x</span>
-            </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz7')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
         </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz8')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
+        </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz9')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
+        </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz10')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
+        </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz11')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
+        </div>
+        <div class="friend-item" (click)="goToFriendProfle('Deniz12')">
+          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
+          <span class="friend-username">User x</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -20,12 +20,14 @@ import { Post } from './../../models/postModel';
 export class UserComponent implements OnInit {
 
   isMe: boolean;
+  showSettings: boolean;
   username: string;
   user_avatar: string;
   user_posts: Post[];
   user_friends: any[];
   user_details: any;
-  user_preferences: any;
+  user_preferences: {};
+  privacy_settings: any[];
 
   /*
     1.0 MB (1024 Kilobyte) = 1048576
@@ -39,10 +41,32 @@ export class UserComponent implements OnInit {
     private _postService: PostsService,
     private _accountService: AccountService,
     private _alert: AlertService,
-  ) { }
+  ) {
+
+     
+
+    this.privacy_settings = [
+      {
+        type: 1,
+        name: "Public"
+      },
+      {
+        type: 2,
+        name: "Friends"
+      },
+      {
+        type: 3,
+        name: "Private"
+      }
+    ];
+
+    this.user_preferences = this.privacy_settings[0];
+
+   
+  }
 
   ngOnInit() {
-    
+
     this.user_avatar = "assets/images/user-default.png";
 
     // GET USER NAME FROM URL PARAMS
@@ -50,45 +74,74 @@ export class UserComponent implements OnInit {
       .map(params => params['username'])
       .subscribe(username_url_param => {
         this.username = username_url_param;
-
-        if (username_url_param === 'me') {
-          this.isMe = true;
-          // GET FRIENDS
-        } else {
-          this.isMe = false;
-        }
-
+        this.isMe = username_url_param === 'me';
         this._loadUserData(this.username);
       });
   }
-
 
   goToFriendProfle(username: string) {
     this._router.navigate([`user/${username}`]);
   }
   //----------------------------------------------------------------------------
 
-  readUrl(event: any) {
+  updateUserSettings(): void {
+    this._accountService.updateUserPreferences([this.user_preferences])
+      .then((response) => {
+            this._alert.success("Success", "Settings are update! \n👨‍💻");
+            this.showSettings = false;
+          })
+          .catch((err) => {
+            this._alert.error("💩 happens....", "Unfortunately you settings are not updated! \nPlease try again!");
+            this.showSettings = false;
+          });
+  }
+
+  //----------------------------------------------------------------------------
+
+  pictureUpload(event: any) {
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
       let fileInfo = event.target.files[0];
-      
+
       // CHECK IMAGE SIZE
-      if(fileInfo.size > this.AVATAR_MAX_SIZE){
+      if (fileInfo.size > this.AVATAR_MAX_SIZE) {
         this._alert.error("WOW MAN!", "THE SELECTED IMAGE IS TOOOO BIG....\nMAX ALLOWED SIZE IS 1 MB!");
         return;
       }
 
+      console.log('file type');
+      console.log(fileInfo);
+      // CHECK FILE TYPE
+      if(!fileInfo.type.includes('image') ){
+        this._alert.error("NOT IMAGE!", "Ai ai ai.....");
+        return;
+      }
+      else{
+        console.log('OK IMAGE TYPE');
+      }
+
       reader.onload = (event: any) => {
         let imageAsBase64 = event.target.result;
-        this.user_avatar = imageAsBase64;
         // @TODO => API CALL => SAVE IMAGE
-        this._alert.success("Success", "Wow your avatar looks great! \nThe Picture is successfully saved!");
+        this._accountService.uploadPRofilePicture(imageAsBase64)
+          .then((response) => {
+            this.user_avatar = imageAsBase64;
+            this._alert.success("Success", "Wow your avatar looks great! \nThe Picture is successfully saved!");
+          })
+          .catch((err) => {
+            this._alert.error("What a sad, sad day 😢", "Unfortunately you picture is not saved! \nPlease try again!");
+          });
+
       }
 
       reader.readAsDataURL(event.target.files[0]);
     }
   }
+  //----------------------------------------------------------------------------
+  showUserSettings(): void {
+    this.showSettings = !this.showSettings;
+  }
+
   //----------------------------------------------------------------------------
 
   //----------------------------------------------------------------------------
@@ -112,6 +165,7 @@ export class UserComponent implements OnInit {
 
     // _accountService get details call
     // this.user_details = response
+    // this.user_avatar = picture.from.server
   }
   //----------------------------------------------------------------------------
   _getUserPosts(username: string): any {
