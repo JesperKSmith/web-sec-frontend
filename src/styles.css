@@ -1,6 +1,11 @@
 body {
   padding-top: 5rem;
 }
+
+.navbar{
+  background-color: rgb(66, 103, 178) !important;
+}
+
 .starter-template {
   padding: 3rem 1.5rem;
   text-align: center;
@@ -49,4 +54,14 @@ body {
   padding: 31px;
   border-radius: 10px;
   background: rgba(220, 220, 220, 0.37);
+}
+
+.mt20{
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        min-width: 500px;
+    }
 }
