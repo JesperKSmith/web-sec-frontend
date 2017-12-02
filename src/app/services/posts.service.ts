@@ -73,7 +73,7 @@ export class PostsService {
           title: `Post title nr:${i+1}`,
           content: `Post content content content content content content`,
           createdAt: new Date(),
-          username: `Deniz Peniz Noze`
+          username: `Username`
         })
     }
 

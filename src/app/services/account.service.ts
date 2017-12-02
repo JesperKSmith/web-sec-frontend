@@ -19,14 +19,43 @@ export class AccountService {
 
   //----------------------------------------------------------------------------
   // GET PRFERENCES
-  getPreferences(){
+  getPreferences() {
     return this._http
       .get("PREFERENCES URL HERE", this._requestService.AuthHeadersForGET())
-        .toPromise()
-          .then((preferences) => preferences.json())
-          .catch(this.handleError);
+      .toPromise()
+      .then((preferences) => preferences.json())
+      .catch(this.handleError);
   }
 
+  //----------------------------------------------------------------------------
+  // UPDATE USER PICTURE
+  uploadPRofilePicture(base64picture: string) {
+
+    // @TODO change API URL
+    return this._http.post(
+      Config.devApiPostRequestUrl,
+      this._makePicturePayload(base64picture),
+      this._requestService.AuthHeadersForPOST()
+    )
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  //----------------------------------------------------------------------------
+  // UPDATE USER PREFERENCES
+  updateUserPreferences(preferences: any[]){
+
+    // @TODO change API URL
+    return this._http.post(
+      Config.devApiPostRequestUrl,
+      this._makePreferencesPayload(preferences),
+      this._requestService.AuthHeadersForPOST()
+    )
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
 
   //----------------------------------------------------------------------------
   // PRIVATE FUNCTION ----------------------------------------------------------
@@ -35,10 +64,26 @@ export class AccountService {
     return Promise.reject(error.message || error);
   }
 
+  private _makePicturePayload(base64picture: string): any {
+    return JSON.stringify(
+      {
+        picture: base64picture
+      }
+    );
+  }
+
+  private _makePreferencesPayload(preferences: any){
+    return JSON.stringify(
+      {
+        preferences: preferences
+      }
+    );
+  }
+
   //----------------------------------------------------------------------------
   // DUMMY DATA       ----------------------------------------------------------
   //----------------------------------------------------------------------------
-  getFriends(amount:number){
+  getFriends(amount: number) {
 
     let friends = [];
 
