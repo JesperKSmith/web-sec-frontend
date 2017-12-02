@@ -2,6 +2,28 @@
     color: rgba(128, 128, 128, 0.7);
 }
 
+.post-title{
+    margin-bottom: 20px;
+}
+
+.post-author-name{
+    cursor: pointer;
+}
+
+.post-author-name:hover{
+    color: #2196F3;
+}
+
+.post-posted-on{
+    font-weight: 200;
+    color: black;
+}
+
+.post-date{
+    font-weight: 200;
+    color: #2196F3;
+}
+
 /* COMMENTS RELATED */
 
 
@@ -53,14 +75,4 @@
     cursor: pointer;
     background: rgba(5, 115, 203, 0.9686274509803922);
     color: white;
-}
-
-.post-posted-on{
-    font-weight: 200;
-    color: black;
-}
-
-.post-date{
-    font-weight: 200;
-    color: #2196F3;
 }

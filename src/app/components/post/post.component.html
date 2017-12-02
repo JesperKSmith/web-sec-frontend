@@ -2,18 +2,21 @@
 
   <!-- POST BODY-->
   <div class="card-block">
-    <h4 class="card-title">{{post.title}}</h4>
+    <h4 class="card-title post-title">{{post.title}}</h4>
     <h6 class="card-subtitle mb-2 post-author">
-      <i class="fa fa-user" aria-hidden="true"></i> by <span class="post-author-name">{{post.username}}</span>
+      <i class="fa fa-user" aria-hidden="true"></i> by 
+      <span class="post-author-name" (click)="goToUserProfile()">
+          {{post.username}}
+      </span>
       <span class="post-posted-on">posted on </span>
-      <span class="post-date">{{post.createdAt}}</span>
+      <span class="post-date">{{post.createdAt | date:'medium' }}</span>
     </h6>
     <p class="card-text">{{post.content}}</p>
 
     <!-- POST COMMENTS SECTION-->
     <!-- Read Comments -->
     <div class="comments-read" (click)="showComments()">
-      Read Comments
+      {{commentsVisible ? 'Hide Comments' : 'Read Comments'}}
     </div>
 
     <div class="comments-container" *ngIf="commentsVisible">
@@ -39,7 +42,7 @@
       <div class="input-group">
         <input type="text" 
                class="form-control" 
-               placeholder="Recipient's username" 
+               placeholder="Write a comment here...." 
                aria-describedby="basic-addon2"
                [(ngModel)]="newComment">
         <span class="input-group-addon comment-submit" 

@@ -59,4 +59,25 @@ export class PostsService {
     });
   }
 
+  //----------------------------------------------------------------------------
+  // DUMMY DATA ----------------------------------------------------------------
+  //----------------------------------------------------------------------------
+
+  getDummyPosts(amount:number): any{
+
+    let posts = [];
+
+    for (var i = 0; i < amount; i++) {
+        posts.push({
+          id:i,
+          title: `Post title nr:${i+1}`,
+          content: `Post content content content content content content`,
+          createdAt: new Date(),
+          username: `Deniz Peniz Noze`
+        })
+    }
+
+    return posts;
+  }
+
 }

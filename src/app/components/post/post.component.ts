@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Post } from './../../models/postModel';
 
@@ -12,7 +13,7 @@ import { Comment } from "../../models/commentModel";
   styleUrls: ['./post.component.css'],
   providers: [CommentsService]
 })
-export class PostComponent {
+export class PostComponent{
 
   @Input() post: Post;
 
@@ -23,7 +24,8 @@ export class PostComponent {
 
   constructor(
     private _commentService: CommentsService,
-    private _alert: AlertService
+    private _alert: AlertService,
+    private _router: Router
   ) {
       this.comments = [];
       this.newComment = "";
@@ -63,6 +65,10 @@ export class PostComponent {
     //Get Comments for the post PROD
     this._getCommentsForPost();
   }
+  //----------------------------------------------------------------------------
+  goToUserProfile(): void{
+    this._router.navigate([`/user/${this.post.username}`]);
+  }
 
   //============================================================================
   // Private Function
@@ -89,4 +95,6 @@ export class PostComponent {
   _sanitize(dataToSanitize: string): string {
     return dataToSanitize;
   }
+
+
 }
