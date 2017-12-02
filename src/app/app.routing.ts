@@ -23,6 +23,8 @@ export const routes: Routes = [
    { path: 'landing', component: LandingComponent },
    { path: 'login', component: LoginComponent },
    { path: 'register', component: RegisterComponent },      
+   { path: 'user/:username', component: UserComponent },      
+   { path: 'friends', component: FriendsComponent },      
    { path: 'home', component: MainComponent, canActivate: [AuthGuard]},
    { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard]},
    { path: 'private', component: PrivateComponent, canActivate: [AuthGuard] },

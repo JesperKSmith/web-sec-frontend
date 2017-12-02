@@ -32,7 +32,6 @@ import { RequestService } from './services/request.service';
 import { AuthService } from './services/auth.service';
 import { AlertService } from './services/alert-service.service';
 import { AuthGuard } from './services/auth-guard.service';
-import { LandingComponent } from './components/landing/landing.component';
 //==============================================================================
 // [ SERVICES END ]
 //==============================================================================
@@ -50,7 +49,9 @@ import { LandingComponent } from './components/landing/landing.component';
     PrivateComponent,
     CreatePostComponent,
     PostComponent,
-    LandingComponent
+    LandingComponent,
+    UserComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,
