@@ -7,4 +7,5 @@ export var Config =  {
   apiCommentsUrl : `${apiBaseUrl}/CommentController.php`,
   apiLoginUrl : `${apiBaseUrl}/UserController.php/Login`,
   apiRegisterUrl : `${apiBaseUrl}/UserController.php/Register`,
+  devApiPostRequestUrl : "http://localhost:7777/api/test"
 }
