@@ -1,3 +1,44 @@
-.brand-name{
+.landing-image{
+    width: 450px;
+    height: 100%;
+}
 
+.flex-center{
+    display: flex;
+    justify-content: center;
+}
+
+.landing-slogan{
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    color: rgb(119, 117, 117);
+    margin-top: 30px;
+}
+
+.landing-button{
+    min-width: 140px;
+    min-height: 60px;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 5px;
+    margin: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+}
+
+.landing-button-login{
+    background:rgb(66, 103, 178);
+}
+
+.landing-button-register{
+    background: rgb(76, 175, 80);
+}
+
+.anding-button span{
+    margin-left: 5px;
 }
