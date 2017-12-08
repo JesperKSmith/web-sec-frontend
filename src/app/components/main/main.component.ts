@@ -24,10 +24,7 @@ export class MainComponent implements OnInit {
   getPosts(): void {
     this._postService.getPosts()
       .then((posts) => {
-        console.log('POST');
         this.posts = posts;
-        console.log(this.posts);
-        console.table(this.posts);
       });
   }
 }
