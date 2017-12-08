@@ -67,41 +67,27 @@
   <div class="posts-friends-container">
 
     <!--POSTS-->
-    <div class="user-posts" [class.full-width]="!isMe">
+    <!--The below line should be used when friends list functionality is used-->
+    <!--<div class="user-posts" [class.full-width]="!isMe">-->
+    <div class="user-posts full-width">
       <post-component [post]="post" *ngFor="let post of user_posts"></post-component>
     </div>
 
+    <!--=====================================================================-->
+    <!-- FRIENDS LIST START-->
+    <!--@TODO: make it as a separate friends-list component? -->
+    <!--
     <div class="user-friends-list" *ngIf="isMe">
-      <!--<div *ngFor="let friend of user_friends">
+      <div *ngFor="let friend of user_friends">
             <p>{{friend.name}}</p>
-        </div>-->
-
+        </div>
+    
       <div>
         <span class="friends-status online">
             Online 
             <i class="fa fa-circle online-icon" aria-hidden="true"></i>
           </span>
         <div class="friend-item" (click)="goToFriendProfle('Deniz1')">
-          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-          <span class="friend-username">User x</span>
-        </div>
-        <div class="friend-item" (click)="goToFriendProfle('Deniz2')">
-          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-          <span class="friend-username">User x</span>
-        </div>
-        <div class="friend-item" (click)="goToFriendProfle('Deniz3')">
-          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-          <span class="friend-username">User x</span>
-        </div>
-        <div class="friend-item" (click)="goToFriendProfle('Deniz4')">
-          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-          <span class="friend-username">User x</span>
-        </div>
-        <div class="friend-item" (click)="goToFriendProfle('Deniz5')">
-          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-          <span class="friend-username">User x</span>
-        </div>
-        <div class="friend-item" (click)="goToFriendProfle('Deniz6')">
           <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
           <span class="friend-username">User x</span>
         </div>
@@ -116,27 +102,12 @@
           <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
           <span class="friend-username">User x</span>
         </div>
-        <div class="friend-item" (click)="goToFriendProfle('Deniz8')">
-          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-          <span class="friend-username">User x</span>
-        </div>
-        <div class="friend-item" (click)="goToFriendProfle('Deniz9')">
-          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-          <span class="friend-username">User x</span>
-        </div>
-        <div class="friend-item" (click)="goToFriendProfle('Deniz10')">
-          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-          <span class="friend-username">User x</span>
-        </div>
-        <div class="friend-item" (click)="goToFriendProfle('Deniz11')">
-          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-          <span class="friend-username">User x</span>
-        </div>
-        <div class="friend-item" (click)="goToFriendProfle('Deniz12')">
-          <img src="http://via.placeholder.com/50x50" alt="" class="friend-icon">
-          <span class="friend-username">User x</span>
-        </div>
       </div>
-    </div>
+    </div> 
+    -->
+    <!-- FRIENDS LIST END-->
+    <!--=====================================================================-->
+
+
   </div>
 </div>
