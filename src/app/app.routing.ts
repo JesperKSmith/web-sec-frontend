@@ -24,6 +24,7 @@ export const routes: Routes = [
    { path: 'login', component: LoginComponent },
    { path: 'register', component: RegisterComponent },      
    { path: 'user/:username', component: UserComponent, canActivate: [AuthGuard] },      
+   { path: 'user/:user_id', component: UserComponent, canActivate: [AuthGuard] },      
 //    { path: 'friends', component: FriendsComponent },      
    { path: 'home', component: MainComponent, canActivate: [AuthGuard]},
    { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard]},
