@@ -6,8 +6,9 @@
 
     <div class="user-avatar">
       <img class="img-responsive user-image" [src]="user_avatar">
-      <input type="file" name="file" id="imageUpload" class="inputfile" accept="image/x-png,image/gif,image/jpeg" (change)="pictureUpload($event)"
-      />
+      <input type="file" name="file" id="imageUpload" class="inputfile" 
+             accept="image/x-png,image/gif,image/jpeg" 
+             (change)="pictureUpload($event)"/>
       <label for="imageUpload" *ngIf="isMe">
         <i class="fa fa-cloud-upload image-upload-icon" aria-hidden="true"></i>
       </label>
@@ -16,7 +17,7 @@
     <div class="profile-menu">
       <div class="profile-menu-item" *ngIf="isMe">
         <span (click)="showUserSettings()">
-          <i class="fa fa-cog" aria-hidden="true"></i> Settings
+          <i class="fa fa-cog" aria-hidden="true"></i> {{ showSettings? 'Hide Settings': 'Settings' }}
         </span>
       </div>
       <!--<div class="profile-menu-item">
@@ -34,8 +35,8 @@
       </label>
 
       <div class="user-settins-selector">
-        <select id="exampleFormControlSelect1" [(ngModel)]="user_preferences">
-          <option *ngFor="let s of privacy_settings" 
+        <select id="exampleFormControlSelect1" [(ngModel)]="user_picture_preferences">
+          <option *ngFor="let s of possiblePreferences" 
                   [ngValue]="s">
             {{s.name}}
           </option>
