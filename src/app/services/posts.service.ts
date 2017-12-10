@@ -17,12 +17,22 @@ export class PostsService {
 
   constructor(
     @Inject(Http) private _http: Http,
-    private _requestService: RequestService
+    private _requestService: RequestService,
   ) { }
 
   //----------------------------------------------------------------------------
   // GET POSTS
   getPosts(){
+    return this._http
+      .get(`${Config.apiPostsUrl}?recent=true`, this._requestService.AuthHeadersForGET())
+        .toPromise()
+          .then((posts) => posts.json())
+          .catch(this.handleError);
+  }
+
+  //----------------------------------------------------------------------------
+  // GET MY POSTS
+  getMyPosts(){
     return this._http
       .get(Config.apiPostsUrl, this._requestService.AuthHeadersForGET())
         .toPromise()
@@ -31,9 +41,18 @@ export class PostsService {
   }
 
   //----------------------------------------------------------------------------
-  // GET POSTS
-  savePost(newPost: Post) {
+  // GET MY POSTS
+  getUserPosts(user_id:number){
+    return this._http
+      .get(Config.apiUserPostsUrl(user_id), this._requestService.AuthHeadersForGET())
+        .toPromise()
+          .then((posts) => posts.json())
+          .catch(this.handleError);
+  }
 
+  //----------------------------------------------------------------------------
+  // SAVE POSTS
+  savePost(newPost: Post) {
     return this._http.post(
       Config.apiPostsUrl,
       this.makePostPayload(newPost),
@@ -47,7 +66,13 @@ export class PostsService {
   //----------------------------------------------------------------------------
   // PRIVATE FUNCTION ----------------------------------------------------------
   //----------------------------------------------------------------------------
-  private handleError(error: any): Promise<any> {
+  handleError(error: any): Promise<any> {
+    // this._aaaaa.logHttpRequestError(error);
+
+    console.log('ERROR:');
+    console.log(error);
+    console.log(error.status);
+
     return Promise.reject(error.message || error);
   }
 
@@ -57,27 +82,6 @@ export class PostsService {
       title: newPost.title,
       content: newPost.content
     });
-  }
-
-  //----------------------------------------------------------------------------
-  // DUMMY DATA ----------------------------------------------------------------
-  //----------------------------------------------------------------------------
-
-  getDummyPosts(amount:number): any{
-
-    let posts = [];
-
-    for (var i = 0; i < amount; i++) {
-        posts.push({
-          id:i,
-          title: `Post title nr:${i+1}`,
-          content: `Post content content content content content content`,
-          createdAt: new Date(),
-          username: `Username`
-        })
-    }
-
-    return posts;
   }
 
 }
