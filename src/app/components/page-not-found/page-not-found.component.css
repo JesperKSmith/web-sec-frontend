@@ -1,0 +1,14 @@
+.not-found{
+    display: flex;
+    align-items: baseline;
+    padding: 100px 30px;
+    background: rgba(128, 128, 128, 0.050980392156862744);
+    color: rgba(128, 128, 128, 0.7098039215686275);
+}
+
+.error-404{
+    font-size: 40px;
+    font-weight: bold;
+    color: rgba(66, 103, 178, 0.7686274509803922);
+    margin-right: 15px;
+}
