@@ -67,7 +67,7 @@ export class PostComponent{
   }
   //----------------------------------------------------------------------------
   goToUserProfile(): void{
-    this._router.navigate([`/user/${this.post.username}`]);
+    this._router.navigate([`/user/${this.post.user_id }`]);
   }
 
   //============================================================================
