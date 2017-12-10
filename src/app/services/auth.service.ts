@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor( 
     private router: Router,
-    @Inject(Http) private _http: Http
+    @Inject(Http) private _http: Http,
   ) { }
 
   // LOGIN
