@@ -16,7 +16,7 @@
 }
 
 .landing-button{
-    min-width: 140px;
+    /*min-width: 140px;
     min-height: 60px;
     display: flex;
     -webkit-box-pack: center;
@@ -25,20 +25,29 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 5px;*/
     margin: 10px;
-    color: rgb(255, 255, 255);
+    /*color: rgb(255, 255, 255);*/
     font-size: 18px;
 }
 
 .landing-button-login{
-    background:rgb(66, 103, 178);
+    color:rgb(66, 103, 178);
 }
 
 .landing-button-register{
-    background: rgb(76, 175, 80);
+    color: rgb(76, 175, 80);
 }
 
 .anding-button span{
     margin-left: 5px;
+}
+
+.landing-button-text{
+    font-family: 'Roboto', sans-serif;
+}
+
+.landing-branding{
+    margin: 0 5px;
+    color:rgb(66, 103, 178);
 }
