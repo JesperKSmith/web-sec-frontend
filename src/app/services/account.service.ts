@@ -18,52 +18,87 @@ export class AccountService {
   ) { }
 
   //----------------------------------------------------------------------------
-  // GET PRFERENCES
-  getPreferences() {
+  // GET MY PREFERENCES
+  getMyPreferences() {
     return this._http
-      .get("PREFERENCES URL HERE", this._requestService.AuthHeadersForGET())
+      .get(Config.apiAccountPreferencesUrl, this._requestService.AuthHeadersForGET())
       .toPromise()
       .then((preferences) => preferences.json())
+      .catch(this.handleError);
+  }
+  //----------------------------------------------------------------------------
+  // GET PREFERENCE TYPES
+  getPreferenceTypes(){
+    return this._http
+      .get(Config.apiAccountPreferenceTypesUrl, this._requestService.AuthHeadersForGET())
+      .toPromise()
+      .then((preferenceTypes) => preferenceTypes.json())
       .catch(this.handleError);
   }
 
   //----------------------------------------------------------------------------
   // UPDATE USER PICTURE
-  uploadPRofilePicture(base64picture: string) {
+  uploadProfilePicture(base64picture: string) {
 
-    // @TODO change API URL
     return this._http.post(
-      Config.devApiPostRequestUrl,
+      Config.apiPictureUrl,
       this._makePicturePayload(base64picture),
       this._requestService.AuthHeadersForPOST()
     )
       .toPromise()
-      .then(response => response.json())
+      .then(response => {
+        if(response.status === 200){
+           return Promise.resolve();
+        }
+      })
       .catch(this.handleError);
   }
-
   //----------------------------------------------------------------------------
   // UPDATE USER PREFERENCES
-  updateUserPreferences(preferences: any[]){
+  updateUserPreferences(preference: any){
 
-    // @TODO change API URL
     return this._http.post(
-      Config.devApiPostRequestUrl,
-      this._makePreferencesPayload(preferences),
+      Config.apiAccountPreferencesUrl,
+      this._makePreferencesPayload(preference),
       this._requestService.AuthHeadersForPOST()
+    )
+      .toPromise()
+      .then(response => {
+        if(response.status === 200){
+           return Promise.resolve();
+        }
+      })
+      .catch(this.handleError);
+  }
+  //----------------------------------------------------------------------------
+  // GET MY PICTURE
+  getMyPicture(){
+    return this._http.get(
+      Config.apiPictureUrl,
+      this._requestService.AuthHeadersForGET()
     )
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
   }
-
+   //----------------------------------------------------------------------------
+  // GET USER PICTURE
+  getUserPicture(user_id:number){
+    return this._http.get(
+      `${Config.apiPictureUrl}?user_id=${user_id}`,
+      this._requestService.AuthHeadersForGET()
+    )
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
   //----------------------------------------------------------------------------
-  // PRIVATE FUNCTION ----------------------------------------------------------
+  // PRIVATE FUNCTIONS ----------------------------------------------------------
   //----------------------------------------------------------------------------
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
   }
-
+  //----------------------------------------------------------------------------
   private _makePicturePayload(base64picture: string): any {
     return JSON.stringify(
       {
@@ -71,29 +106,14 @@ export class AccountService {
       }
     );
   }
-
-  private _makePreferencesPayload(preferences: any){
+  //----------------------------------------------------------------------------
+  private _makePreferencesPayload(preferences:any){
     return JSON.stringify(
       {
-        preferences: preferences
+        type_id: preferences.type_id,
+        level_id: preferences.level_id,
       }
     );
   }
-
   //----------------------------------------------------------------------------
-  // DUMMY DATA       ----------------------------------------------------------
-  //----------------------------------------------------------------------------
-  getFriends(amount: number) {
-
-    let friends = [];
-
-    for (var i = 0; i < amount; i++) {
-      friends.push({
-        name: `Friend #${i}`
-      })
-    }
-
-    return friends;
-  }
-
 }
